@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,12 +26,11 @@ class _HomePageState extends State<HomePage> {
           child: TextField(
             // autofocus: true,
             controller: _controller,
-
             inputFormatters: [
               // FilteringTextInputFormatter.allow(RegExp(r"[a-z]"))
             ],
             keyboardType: TextInputType.text,
-            maxLength: 10,
+            // maxLength: 0,
             // minLines: 5,
             // maxLines: 10,
             decoration: const InputDecoration(
@@ -55,6 +53,15 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             cursorColor: Colors.red,
+            onChanged: (value) {
+              print("On changed $value");
+            },
+            onTap: () {
+              print("On tapped");
+            },
+            onSubmitted: (value) {
+              print("Submitted $value");
+            },
           ),
         ),
       ),
