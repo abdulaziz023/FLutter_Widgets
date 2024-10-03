@@ -9,7 +9,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // theme: ThemeData(fontFamily: "monserrat"),
-      home: const HomePage(),
+      home: HomePage(),
     );
   }
 }
