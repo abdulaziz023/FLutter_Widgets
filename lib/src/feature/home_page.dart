@@ -1,101 +1,68 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:lesson_project/src/feature/new_page.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  int increment = 0;
-  bool check = false;
-  bool show = false;
+  final PageController pageController = PageController();
+  int index = 0;
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text("$increment"),
-            SizedBox(
-              height: 50,
-              width: 150,
-              child: ElevatedButton(
-                onPressed: () {
-                  print("On tap");
-                },
-                onLongPress: () {
-                  print("Long press");
-                },
-                onHover: (value) {
-                  print(value);
-                },
-                style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all(Colors.amber),
-                    elevation: const WidgetStatePropertyAll(10),
-                    overlayColor: const WidgetStatePropertyAll(Colors.red),
-                    shadowColor: const WidgetStatePropertyAll(Colors.yellow)),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(Icons.mail),
-                    Text("Gmail"),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(
-              width: 112,
-              child: CheckboxMenuButton(
-                value: check,
-                onChanged: (bool? value) {
-                  setState(() {
-                    // check = !check;
-                    check = value!;
-                  });
-                },
-                child: const Text("DATA"),
-              ),
-            ),
-            RawMaterialButton(
-              onPressed: () {
-                setState(() {
-                  show = !show;
-                  check = !check;
-                });
-              },
-              child: const Text("Row Material Button"),
-            ),
-            show ? const Text("Salom") : const Text(""),
-            CupertinoButton(
-              child: const Text("CupertinoButton"),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const NewPage(),
-                  ),
-                );
-              },
-            )
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
+      body: PageView(
+        controller: pageController,
+        onPageChanged: (value) {
           setState(() {
-            increment++;
+            index = value;
           });
         },
-        backgroundColor: Colors.blueAccent,
-        child: const Icon(Icons.add_box),
+        children: [
+          Center(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Switch(
+                value: false,
+                onChanged: (value) {},
+              ),
+              ElevatedButton(onPressed: () {}, child: Text("Elevated buton"))
+            ],
+          )),
+          Center(child: Text("Profile Page")),
+          Center(child: Text("Favourite Page")),
+          Center(child: Text("Settings Page")),
+        ],
+      ),
+      bottomNavigationBar: NavigationBar(
+        destinations: const [
+          NavigationDestination(icon: Icon(Icons.home), label: "Home"),
+          NavigationDestination(icon: Icon(Icons.person), label: "Profile"),
+          NavigationDestination(icon: Icon(Icons.star), label: "Favourite"),
+          NavigationDestination(icon: Icon(Icons.settings), label: "Settings"),
+        ],
+        animationDuration: const Duration(seconds: 1),
+        indicatorColor: Colors.red,
+        backgroundColor: Colors.blue,
+        overlayColor: const WidgetStatePropertyAll(Colors.yellow),
+        elevation: 10,
+        selectedIndex: index,
+        onDestinationSelected: (value) {
+          setState(() {
+            index = value;
+            pageController.jumpToPage(value);
+          });
+        },
       ),
     );
   }

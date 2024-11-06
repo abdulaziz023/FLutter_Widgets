@@ -8,7 +8,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // theme: ThemeData(fontFamily: "monserrat"),
+      theme: ThemeData(
+          // fontFamily: "monserrat",
+          ),
       home: HomePage(),
     );
   }
