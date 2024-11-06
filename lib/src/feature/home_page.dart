@@ -36,33 +36,50 @@ class _HomePageState extends State<HomePage> {
                 value: false,
                 onChanged: (value) {},
               ),
-              ElevatedButton(onPressed: () {}, child: Text("Elevated buton"))
+              ElevatedButton(
+                  onPressed: () {}, child: const Text("Elevated buton"))
             ],
           )),
-          Center(child: Text("Profile Page")),
-          Center(child: Text("Favourite Page")),
-          Center(child: Text("Settings Page")),
+          const Center(child: Text("Profile Page")),
+          const Center(child: Text("Favourite Page")),
+          const Center(child: Text("Settings Page")),
         ],
       ),
-      bottomNavigationBar: NavigationBar(
-        destinations: const [
-          NavigationDestination(icon: Icon(Icons.home), label: "Home"),
-          NavigationDestination(icon: Icon(Icons.person), label: "Profile"),
-          NavigationDestination(icon: Icon(Icons.star), label: "Favourite"),
-          NavigationDestination(icon: Icon(Icons.settings), label: "Settings"),
-        ],
-        animationDuration: const Duration(seconds: 1),
-        indicatorColor: Colors.red,
-        backgroundColor: Colors.blue,
-        overlayColor: const WidgetStatePropertyAll(Colors.yellow),
-        elevation: 10,
-        selectedIndex: index,
-        onDestinationSelected: (value) {
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.yellow,
+        // fixedColor: Colors.blue,
+        landscapeLayout: BottomNavigationBarLandscapeLayout.linear,
+        selectedFontSize: 20,
+        selectedItemColor: Colors.red,
+        selectedIconTheme: IconThemeData(color: Colors.indigo),
+        // showSelectedLabels: false,
+        // showUnselectedLabels: false,
+        unselectedFontSize: 30,
+        unselectedIconTheme: IconThemeData(color: Colors.deepOrange),
+        unselectedLabelStyle: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+
+        currentIndex: index,
+        onTap: (value) {
           setState(() {
             index = value;
-            pageController.jumpToPage(value);
           });
         },
+        items: const [
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home,
+              ),
+              label: "Home",
+              activeIcon: Icon(Icons.circle)),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.person,
+            ),
+            label: "Person",
+          ),
+        ],
       ),
     );
   }
