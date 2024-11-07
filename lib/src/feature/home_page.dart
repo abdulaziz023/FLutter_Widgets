@@ -20,65 +20,61 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
-        controller: pageController,
-        onPageChanged: (value) {
-          setState(() {
-            index = value;
-          });
-        },
+      body: ListView(
+        addRepaintBoundaries: true,
+        physics: BouncingScrollPhysics(),
+        padding: EdgeInsets.all(20),
+        scrollDirection: Axis.vertical,
+        itemExtent: 100,
         children: [
-          Center(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Switch(
-                value: false,
-                onChanged: (value) {},
-              ),
-              ElevatedButton(
-                  onPressed: () {}, child: const Text("Elevated buton"))
-            ],
-          )),
-          const Center(child: Text("Profile Page")),
-          const Center(child: Text("Favourite Page")),
-          const Center(child: Text("Settings Page")),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.yellow,
-        // fixedColor: Colors.blue,
-        landscapeLayout: BottomNavigationBarLandscapeLayout.linear,
-        selectedFontSize: 20,
-        selectedItemColor: Colors.red,
-        selectedIconTheme: IconThemeData(color: Colors.indigo),
-        // showSelectedLabels: false,
-        // showUnselectedLabels: false,
-        unselectedFontSize: 30,
-        unselectedIconTheme: IconThemeData(color: Colors.deepOrange),
-        unselectedLabelStyle: TextStyle(
-          fontWeight: FontWeight.bold,
-        ),
-
-        currentIndex: index,
-        onTap: (value) {
-          setState(() {
-            index = value;
-          });
-        },
-        items: const [
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-              ),
-              label: "Home",
-              activeIcon: Icon(Icons.circle)),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person,
-            ),
-            label: "Person",
+          SizedBox(
+            height: 100,
+            width: 200,
+            child: ColoredBox(color: Colors.black),
           ),
+          SizedBox(height: 10),
+          SizedBox(
+            height: 100,
+            width: 200,
+            child: ColoredBox(color: Colors.black),
+          ),
+          SizedBox(height: 10),
+          SizedBox(
+            height: 100,
+            width: 200,
+            child: ColoredBox(color: Colors.black),
+          ),
+          SizedBox(height: 10),
+          SizedBox(
+            height: 100,
+            width: 200,
+            child: ColoredBox(color: Colors.black),
+          ),
+          SizedBox(height: 10),
+          SizedBox(
+            height: 100,
+            width: 200,
+            child: ColoredBox(color: Colors.black),
+          ),
+          SizedBox(height: 10),
+          SizedBox(
+            height: 100,
+            width: 200,
+            child: ColoredBox(color: Colors.black),
+          ),
+          SizedBox(height: 10),
+          SizedBox(
+            height: 100,
+            width: 200,
+            child: ColoredBox(color: Colors.black),
+          ),
+          SizedBox(height: 10),
+          SizedBox(
+            height: 100,
+            width: 200,
+            child: ColoredBox(color: Colors.black),
+          ),
+          SizedBox(height: 10),
         ],
       ),
     );
