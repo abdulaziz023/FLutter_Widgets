@@ -10,6 +10,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final PageController pageController = PageController();
   int index = 0;
+  List<String> names = ["Abdulloh", "Akmal", "Anvar", "Qodir"];
+  List<Color> colors = [Colors.red, Colors.yellow, Colors.green, Colors.black];
 
   @override
   void dispose() {
@@ -20,62 +22,20 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        addRepaintBoundaries: true,
-        physics: BouncingScrollPhysics(),
-        padding: EdgeInsets.all(20),
-        scrollDirection: Axis.vertical,
-        itemExtent: 100,
-        children: [
-          SizedBox(
-            height: 100,
-            width: 200,
-            child: ColoredBox(color: Colors.black),
-          ),
-          SizedBox(height: 10),
-          SizedBox(
-            height: 100,
-            width: 200,
-            child: ColoredBox(color: Colors.black),
-          ),
-          SizedBox(height: 10),
-          SizedBox(
-            height: 100,
-            width: 200,
-            child: ColoredBox(color: Colors.black),
-          ),
-          SizedBox(height: 10),
-          SizedBox(
-            height: 100,
-            width: 200,
-            child: ColoredBox(color: Colors.black),
-          ),
-          SizedBox(height: 10),
-          SizedBox(
-            height: 100,
-            width: 200,
-            child: ColoredBox(color: Colors.black),
-          ),
-          SizedBox(height: 10),
-          SizedBox(
-            height: 100,
-            width: 200,
-            child: ColoredBox(color: Colors.black),
-          ),
-          SizedBox(height: 10),
-          SizedBox(
-            height: 100,
-            width: 200,
-            child: ColoredBox(color: Colors.black),
-          ),
-          SizedBox(height: 10),
-          SizedBox(
-            height: 100,
-            width: 200,
-            child: ColoredBox(color: Colors.black),
-          ),
-          SizedBox(height: 10),
-        ],
+      body: ListView.builder(
+        itemCount: colors.length,
+        itemBuilder: (context, index) {
+          return Column(
+            children: [
+              SizedBox(
+                height: 100,
+                width: double.infinity,
+                child: ColoredBox(color: colors[index]),
+              ),
+              Text(names[index])
+            ],
+          );
+        },
       ),
     );
   }
