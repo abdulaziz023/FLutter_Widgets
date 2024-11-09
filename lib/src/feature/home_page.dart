@@ -22,20 +22,22 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        itemCount: colors.length,
-        itemBuilder: (context, index) {
-          return Column(
-            children: [
-              SizedBox(
-                height: 100,
-                width: double.infinity,
-                child: ColoredBox(color: colors[index]),
-              ),
-              Text(names[index])
-            ],
-          );
-        },
+      body: ListView.custom(
+        padding: EdgeInsets.symmetric(vertical: 10),
+        itemExtent: 50,
+        childrenDelegate: SliverChildListDelegate(
+          [
+            SizedBox(
+              height: 100,
+              child: ColoredBox(color: Colors.black),
+            ),
+            SizedBox(height: 10),
+            SizedBox(
+              height: 100,
+              child: ColoredBox(color: Colors.black),
+            ),
+          ],
+        ),
       ),
     );
   }
