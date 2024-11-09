@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -22,23 +23,26 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.custom(
-        padding: EdgeInsets.symmetric(vertical: 10),
-        itemExtent: 50,
-        childrenDelegate: SliverChildListDelegate(
-          [
-            SizedBox(
+      body: ListView.separated(
+          itemBuilder: (context, index) {
+            return const SizedBox(
               height: 100,
-              child: ColoredBox(color: Colors.black),
-            ),
-            SizedBox(height: 10),
-            SizedBox(
+              child: ColoredBox(
+                color: Colors.red,
+                child: Text("ITEM BUILDER"),
+              ),
+            );
+          },
+          separatorBuilder: (context, index) {
+            return const SizedBox(
               height: 100,
-              child: ColoredBox(color: Colors.black),
-            ),
-          ],
-        ),
-      ),
+              child: ColoredBox(
+                color: Colors.yellow,
+                child: Text("SEPERATED BUILDER"),
+              ),
+            );
+          },
+          itemCount: 10),
     );
   }
 }
