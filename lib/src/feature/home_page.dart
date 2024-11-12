@@ -13,6 +13,7 @@ class _HomePageState extends State<HomePage> {
   int index = 0;
   List<String> names = ["Abdulloh", "Akmal", "Anvar", "Qodir"];
   List<Color> colors = [Colors.red, Colors.yellow, Colors.green, Colors.black];
+  ScrollController controller = ScrollController();
 
   @override
   void dispose() {
@@ -22,27 +23,44 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView.separated(
-          itemBuilder: (context, index) {
-            return const SizedBox(
-              height: 100,
-              child: ColoredBox(
-                color: Colors.red,
-                child: Text("ITEM BUILDER"),
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            Expanded(
+              flex: 2,
+              child: GridView.count(
+                crossAxisCount: 2,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                childAspectRatio: 1,
+                controller: controller,
+                padding: const EdgeInsets.all(10),
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                children: const [
+                  ColoredBox(color: Colors.red),
+                  ColoredBox(color: Colors.yellow),
+                  ColoredBox(color: Colors.green),
+                  ColoredBox(color: Colors.blue),
+                  ColoredBox(color: Colors.red),
+                  ColoredBox(color: Colors.yellow),
+                  ColoredBox(color: Colors.green),
+                  ColoredBox(color: Colors.blue),
+                  ColoredBox(color: Colors.red),
+                  ColoredBox(color: Colors.yellow),
+                  ColoredBox(color: Colors.green),
+                  ColoredBox(color: Colors.blue),
+                ],
               ),
-            );
-          },
-          separatorBuilder: (context, index) {
-            return const SizedBox(
-              height: 100,
-              child: ColoredBox(
-                color: Colors.yellow,
-                child: Text("SEPERATED BUILDER"),
-              ),
-            );
-          },
-          itemCount: 10),
+            ),
+            Expanded(
+              child: Text("SALOMM"),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
