@@ -34,20 +34,13 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          body: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 100,
-            crossAxisSpacing: 10,
-            mainAxisExtent: 100,
-            mainAxisSpacing: 10,
-            childAspectRatio: 10),
-        itemCount: 8,
-        itemBuilder: (BuildContext context, int index) {
-          return ColoredBox(
-            color: colors[index],
-          );
-        },
-      )),
+        body: GridView(
+          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 10,
+          ),
+          children: [],
+        ),
+      ),
     );
   }
 }
