@@ -34,11 +34,40 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: GridView(
-          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 10,
+        body: RefreshIndicator(
+          backgroundColor: Colors.yellow,
+          color: Colors.red,
+          // displacement: 50,
+          // edgeOffset: 200,
+          semanticsLabel: 'salom',
+          strokeWidth: 5,
+
+          onRefresh: () async {
+            return Future.delayed(
+              const Duration(seconds: 1),
+              () {
+                print("Refresh qildiz");
+              },
+            );
+          },
+          child: GridView(
+            padding: EdgeInsets.all(20),
+            //ALign and Alignment
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 200,
+                crossAxisSpacing: 30,
+                mainAxisSpacing: 10),
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(18),
+                child: ColoredBox(color: Colors.red),
+              ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(18),
+                child: ColoredBox(color: Colors.yellow),
+              ),
+            ],
           ),
-          children: [],
         ),
       ),
     );
