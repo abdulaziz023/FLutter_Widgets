@@ -34,92 +34,26 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            Expanded(
-              child: PageView(
-                onPageChanged: (value) {
-                  setState(() {
-                    index = value;
-                  });
-                },
-                controller: pageController,
-                children: const [
-                  Center(
-                    child: SizedBox(
-                      height: 400,
-                      width: 400,
-                      child: ColoredBox(color: Colors.black),
-                    ),
-                  ),
-                  Center(
-                    child: SizedBox(
-                      height: 400,
-                      width: 400,
-                      child: ColoredBox(color: Colors.pink),
-                    ),
-                  ),
-                  Center(
-                    child: SizedBox(
-                      height: 400,
-                      width: 400,
-                      child: ColoredBox(color: Colors.yellow),
-                    ),
-                  ),
-                  Center(
-                    child: SizedBox(
-                      height: 400,
-                      width: 400,
-                      child: ColoredBox(color: Colors.green),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: () {
-                    setState(() {
-                      pageController.animateToPage(index - 1,
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.easeInOut);
-                    });
-                  },
-                  icon: const Icon(Icons.arrow_left),
-                ),
-                Icon(
-                  Icons.circle_rounded,
-                  color: index == 0 ? Colors.red : Colors.black,
-                ),
-                const SizedBox(width: 5),
-                Icon(
-                  Icons.circle_rounded,
-                  color: index == 1 ? Colors.red : Colors.black,
-                ),
-                const SizedBox(width: 5),
-                Icon(
-                  Icons.circle_rounded,
-                  color: index == 2 ? Colors.red : Colors.black,
-                ),
-                IconButton(
-                  onPressed: () {
-                    setState(() {
-                      pageController.animateToPage(index + 1,
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.easeInOut);
-                    });
-                  },
-                  icon: const Icon(Icons.arrow_right),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 40,
-            )
-          ],
+        appBar: AppBar(
+          title: const Text("ScrollBar"),
+        ),
+        body: Scrollbar(
+          controller: controller,
+          thumbVisibility: true,
+          trackVisibility: true,
+          thickness: 10,
+          radius: const Radius.circular(20),
+          child: ListView.builder(
+            controller: controller,
+            itemCount: 40,
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            itemBuilder: (context, index) {
+              return const SizedBox(
+                height: 30,
+                child: ColoredBox(color: Colors.red),
+              );
+            },
+          ),
         ),
       ),
     );
