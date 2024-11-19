@@ -34,26 +34,40 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text("ScrollBar"),
-        ),
-        body: Scrollbar(
-          controller: controller,
-          thumbVisibility: true,
-          trackVisibility: true,
-          thickness: 10,
-          radius: const Radius.circular(20),
-          child: ListView.builder(
-            controller: controller,
-            itemCount: 40,
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            itemBuilder: (context, index) {
-              return const SizedBox(
-                height: 30,
-                child: ColoredBox(color: Colors.red),
-              );
-            },
-          ),
+        body: CustomScrollView(
+          slivers: [
+            const SliverAppBar(
+              pinned: true,
+              actions: [
+                BackButton(),
+              ],
+              expandedHeight: 400,
+              floating: false,
+              snap: false,
+              title: Text("SliverAppBar"),
+              centerTitle: true,
+              flexibleSpace: FlexibleSpaceBar(
+                background: FlutterLogo(),
+              ),
+            ),
+            const SliverToBoxAdapter(
+              child: SizedBox(
+                height: 40,
+                child: Text(
+                    "Slivers ichida Sizedboxni ishlatsez error aks holda SliverToBoxAdapter ni ishlating"),
+              ),
+            ),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  return SizedBox(
+                    height: 30,
+                    child: ColoredBox(color: Colors.blue),
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
