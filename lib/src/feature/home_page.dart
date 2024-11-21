@@ -22,6 +22,14 @@ class _HomePageState extends State<HomePage> {
     Colors.green,
     Colors.black,
   ];
+  List<String> images = [
+    "assets/image/car.jpg",
+    "assets/image/roses.jpeg",
+    "assets/image/winter.jpg",
+    "assets/image/car.jpg",
+    "assets/image/roses.jpeg",
+    "assets/image/winter.jpg",
+  ];
   ScrollController controller = ScrollController();
 
   @override
@@ -36,36 +44,44 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         body: CustomScrollView(
           slivers: [
-            const SliverAppBar(
+            SliverAppBar(
+              // title: Text("SliverAppBar"),
+              // centerTitle: true,
+
               pinned: true,
-              actions: [
-                BackButton(),
-              ],
-              expandedHeight: 400,
-              floating: false,
-              snap: false,
-              title: Text("SliverAppBar"),
-              centerTitle: true,
+
+              backgroundColor: Colors.amber,
+              actions: const [Text("DATA")],
               flexibleSpace: FlexibleSpaceBar(
-                background: FlutterLogo(),
+                  background: Image.asset("assets/image/car.jpg"),
+                  title: const Text("FlexibleSpaceBar"),
+                  centerTitle: true),
+              expandedHeight: 240,
+            ),
+            SliverGrid(
+              delegate: SliverChildListDelegate(
+                [
+                  Image.asset(images[1]),
+                  Image.asset("assets/image/car.jpg"),
+                ],
+              ),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 5,
+                crossAxisSpacing: 5,
+                mainAxisSpacing: 5,
               ),
             ),
-            const SliverToBoxAdapter(
-              child: SizedBox(
-                height: 40,
-                child: Text(
-                    "Slivers ichida Sizedboxni ishlatsez error aks holda SliverToBoxAdapter ni ishlating"),
+            SliverGrid.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 5,
+                crossAxisSpacing: 5,
+                mainAxisSpacing: 5,
               ),
-            ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  return SizedBox(
-                    height: 30,
-                    child: ColoredBox(color: Colors.blue),
-                  );
-                },
-              ),
+              itemCount: images.length,
+              itemBuilder: (context, index) {
+                print(index);
+                return Image.asset(images[index]);
+              },
             ),
           ],
         ),
